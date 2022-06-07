@@ -3,11 +3,11 @@ import './App.css';
 function App() {
   function Deneme(){
     const shoot = ()=>{
-      alert("shoot")
+      alert("ne basıyon lan ibine")
 
     }
     return <button onClick={shoot}>Take the shot!</button>;
-  }
+  }  
   class Deneme2 extends React.Component {
     render(){
       return <p>deneme2</p>
