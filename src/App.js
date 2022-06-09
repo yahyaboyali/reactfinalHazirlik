@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './App.css';
+import Dashboard from './layouts/Dashboard';
 function App() {
   function Deneme(){
     const shoot = ()=>{
@@ -10,7 +13,9 @@ function App() {
   }  
   class Deneme2 extends React.Component {
     render(){
-      return <p>deneme2</p>
+      return (
+        <Nav.Link as={Link} to="/Main">Yerleşkeler</Nav.Link>
+      )
     }
   }
   function ForProps(props){
@@ -45,6 +50,50 @@ function App() {
       </ul>
     );
   }
+  function FormDeneme(){
+    const [name, setname] = useState("");
+    const handleSubmit = (e)=>{
+      e.preventDefault();
+      alert(`girilen isim: ${name}`)
+    }
+    return (
+      <form onSubmit={handleSubmit}>
+        <label>
+          isim :
+          <input  
+          type="text"
+          value={name}
+          onChange={(e)=>setname(e.target.value)}
+          />
+        </label>
+        <input type="submit" />
+      </form>
+    )
+  }
+  //  HOOK
+  function FavColor(){
+    const [color, setcolor] = useState("red")
+    // muhakkak fonksyion içinde yazılmalı. en üstte olmalı
+    return(
+      <>
+      <h1>ilk okunan color: {color}</h1>
+      <button type='button' onClick={()=>setcolor("mavi")}> mavi</button>
+      <button type='button' onClick={()=>setcolor("sarı")}> sarı</button>
+      <button type='button' onClick={()=>setcolor("siyah")}> siyah</button>
+      </>
+    )
+  } 
+  //USE EFFECT
+  function UseEffectUse(){
+    const [sayi, setsayi] = useState(0)
+    useEffect(() => {
+      setTimeout(()=>{
+        setsayi((sayi)=>sayi+1)
+      },1000)
+    }, [])
+    return <h1>render sayısı: {sayi}</h1>
+    
+  }
   return (
     <div className="App">
       <Deneme/>
@@ -52,7 +101,11 @@ function App() {
       <ForProps color="kırmızı"/>
       <IfDeneme isGoal={false}/>
       <DahaGuzelIf isGoal={false}/>
-      <Liste name={["de","dee"]}/>
+      <Liste/>
+      <FormDeneme/>
+      <Dashboard/>
+      <FavColor/>
+      <UseEffectUse/>
     </div>
   );
 }
